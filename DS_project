@@ -1,1 +1,409 @@
 
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+	float data;
+	char name[100];
+	int seat_no;
+
+	struct node *link;
+
+}*header=NULL,*header1=NULL,*header2=NULL;
+
+
+
+void insertbeg_open(float x,char y[100],int z);
+void insertbeg_obc(float x,char y[100],int z);
+void insertbeg_other(float x,char y[100],int z);
+void traversal_open();
+void traversal_obc();
+void traversal_other();
+void sortlist_open();
+void sortlist_obc();
+void sortlist_other();
+void delete_specific_open(int key);
+void delete_specific_obc(int key);
+void delete_specific_other(int key);
+
+
+
+
+void insertbeg_open(float x,char y[20],int z)
+{
+	struct node *n;
+	n=(struct node *)malloc(sizeof(struct node));
+	n->data=x;
+	n->seat_no=z;
+	strcpy(n->name,y);
+	n->link=NULL;
+	if(header==NULL)
+	{
+		header=n;
+	}
+	else
+	{
+		n->link=header;
+		header=n;
+	}
+}
+void insertbeg_obc(float x,char y[20],int z)
+{
+	struct node *n_obc;
+	n_obc=(struct node *)malloc(sizeof(struct node));
+	n_obc->data=x;
+	n_obc->seat_no=z;
+	strcpy(n_obc->name,y);
+	n_obc->link=NULL;
+	if(header1==NULL)
+	{
+		header1=n_obc;
+	}
+	else
+	{
+		n_obc->link=header1;
+		header1=n_obc;
+	}
+}
+void insertbeg_other(float x,char y[20],int z)
+{
+	struct node *n_other;
+	n_other=(struct node *)malloc(sizeof(struct node));
+	n_other->data=x;
+	n_other->seat_no=z;
+	strcpy(n_other->name,y);
+	n_other->link=NULL;
+	if(header2==NULL)
+	{
+		header2=n_other;
+	}
+	else
+	{
+		n_other->link=header2;
+		header2=n_other;
+	}
+}
+
+
+void traversal_open()
+{
+	struct node *p;
+	if(header==NULL)
+	{
+		printf("List is empty");
+	}
+	else
+	{
+		p=header;
+		while(p!=NULL)
+		{
+			
+			printf("\n%s",p->name);
+			printf("\n%d",p->seat_no);
+			printf("\n%f",p->data);
+			
+			
+			p=p->link;
+		}
+	}
+
+}
+void traversal_obc()
+{
+	struct node *p;
+	if(header1==NULL)
+	{
+		printf("\nList is empty");
+	}
+	else
+	{
+		p=header1;
+		while(p!=NULL)
+		{
+			printf("\n%s",p->name);
+			printf("\n%d",p->seat_no);
+			printf("\n%f",p->data);
+			p=p->link;
+		}
+	}
+
+}
+void traversal_other()
+{
+	struct node *p;
+	if(header2==NULL)
+	{
+		printf("\nList is empty");
+	}
+	else
+	{
+		p=header2;
+		while(p!=NULL)
+		{
+			printf("\n%s",p->name);
+			printf("\n%d",p->seat_no);
+			printf("\n%f",p->data);
+			p=p->link;
+		}
+	}
+
+}
+
+
+
+
+void sortlist_open()
+{
+	int temp;
+	struct node *i,*j;
+	i=header;
+	j=header->link;
+	for(i=header;i!=NULL;i=i->link)
+	{
+		for(j=i->link;j!=NULL;j=j->link)
+		{
+			if(i->data<j->data)
+			{
+				temp = i->data;
+				i->data = j->data;
+				j->data = temp;	
+			}
+		}
+	}
+}
+void sortlist_obc()
+{
+	int temp;
+	struct node *i,*j;
+	i=header1;
+	j=header1->link;
+	for(i=header1;i!=NULL;i=i->link)
+	{
+		for(j=i->link;j!=NULL;j=j->link)
+		{
+			if(i->data<j->data)
+			{
+				temp = i->data;
+				i->data = j->data;
+				j->data = temp;	
+			}
+		}
+	}
+}
+void sortlist_other()
+{
+	int temp;
+	struct node *i,*j;
+	i=header2;
+	j=header2->link;
+	for(i=header2;i!=NULL;i=i->link)
+	{
+		for(j=i->link;j!=NULL;j=j->link)
+		{
+			if(i->data<j->data)
+			{
+				temp = i->data;
+				i->data = j->data;
+				j->data = temp;	
+			}
+		}
+	}
+}
+void delete_specific_open(int key)
+{
+struct node *p,*q;
+if(header==NULL)
+{
+	printf("\nlist is empty");
+	return;
+}
+p=header;
+q=header;
+if(p->link==NULL)
+{
+	if(p->seat_no==key)
+	{
+		header=NULL;
+		return;
+	}
+	printf("\nseat no not found");
+	return;
+}
+	while(p!=NULL)
+	{
+		if(p->seat_no==key)
+		{
+			q->link=p->link;
+			break;
+		}
+
+		q=p;
+		p=p->link;
+	}
+	if(p==NULL)
+	{
+		printf("\nseat no not found");
+	}
+}
+
+void delete_specific_obc(int key)
+{
+struct node *p,*q;
+if(header1==NULL)
+{
+	printf("\nlist is empty");
+	return;
+}
+p=header1;
+q=header1;
+if(p->link==NULL)
+{
+	if(p->seat_no==key)
+	{
+		header1=NULL;
+		return;
+	}
+	printf("\nseat no not found");
+	return;
+}
+	while(p!=NULL)
+	{
+		if(p->seat_no==key)
+		{
+			q->link=p->link;
+			break;
+		}
+
+		q=p;
+		p=p->link;
+	}
+	if(p==NULL)
+	{
+		printf("\nseat no not found");
+	}
+}
+void delete_specific_other(int key)
+{
+struct node *p,*q;
+if(header2==NULL)
+{
+	printf("\nlist is empty");
+	return;
+}
+p=header2;
+q=header2;
+if(p->link==NULL)
+{
+	if(p->seat_no==key)
+	{
+		header2=NULL;
+		return;
+	}
+	printf("\nseat no not found");
+	return;
+}
+	while(p!=NULL)
+	{
+		if(p->seat_no==key)
+		{
+			q->link=p->link;
+			break;
+		}
+
+		q=p;
+		p=p->link;
+	}
+	if(p==NULL)
+	{
+		printf("\nseat no not found");
+	}
+}
+
+
+
+
+	
+int main()
+{
+float num;
+int seat_no;
+int choice;
+int key;
+int i;
+char name1[20];
+char cast1[20];
+do{
+printf("\n***********");
+printf("\n1.OPEN(admission form)\n2.OBC(admission form)\n3.SC/ST/NT/other(admission form)\n4.display\n5.cancel admission(OPEN)\n6.cancel admission(OBC)\n7.cancel admission(Other backward class)\n8.Exit");
+
+printf("\nchoose your option");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+	printf("\nenter your FULL name:- ");
+	scanf("%s",name1);
+	printf("\nenter your seat no:- ");
+	scanf("%d",&seat_no);
+	printf("\nenter percentage:- ");
+	scanf("%f",&num);
+	insertbeg_open(num,name1,seat_no);
+	sortlist_open();
+	break;
+case 2:
+	
+	printf("\nenter your FULL name:- ");
+	scanf("%s",name1);
+	printf("\nenter your seat no:- ");
+	scanf("%d",&seat_no);
+	printf("\nenter percentage:- ");
+	scanf("%f",&num);
+	insertbeg_obc(num,name1,seat_no);
+	sortlist_obc();
+	break;
+	
+case 3:
+	
+	printf("\nenter your FULL name:- ");
+	scanf("%s",name1);
+	printf("\nenter your seat no:- ");
+	scanf("%d",&seat_no);
+	printf("\nenter percentage:- ");
+	scanf("%f",&num);
+	insertbeg_other(num,name1,seat_no);
+	sortlist_other();
+	break;
+case 4:
+	printf("\nthe open category list is-\n");
+	traversal_open();
+	printf("\nthe obc category list is-\n");
+	traversal_obc();
+	printf("\nthe backward class list is-\n");
+	traversal_other();
+	break;
+
+case 5:
+	printf("\nsearch your seat_no:-");
+	scanf("%d",&key);
+	delete_specific_open(key);
+	break;
+case 6:
+	printf("\nsearch your seat_no:-");
+	scanf("%d",&key);
+	delete_specific_obc(key);
+	break;
+case 7:
+	printf("\nsearch your seat_no:-");
+	scanf("%d",&key);
+	delete_specific_other(key);
+	break;
+	
+}
+}while(choice!=8);
+return 0;
+}
+
+	
+	
+	
